@@ -8,12 +8,18 @@ import { ConfigModule } from '@nestjs/config';
 import databaseConfig from './config/database.config';
 import loggerConfig from './config/logger.config';
 import { swaggerConfig } from './config/swagger.config';
+import { NotificationModule } from './modules/notification/notification.module';
+import { BullMQModule } from './shared/bullmq/bullmq.module';
+import { MailModule } from './shared/mail/mail.module';
 
 @Module({
   imports: [
     LoggerModule,
     DatabaseModule,
     UserModule,
+    NotificationModule,
+    MailModule,
+    BullMQModule.forRoot(),
     ConfigModule.forRoot({
       isGlobal: true,
       load: [swaggerConfig, databaseConfig, loggerConfig],
